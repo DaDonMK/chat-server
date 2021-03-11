@@ -1,51 +1,124 @@
 let messages = []
-let id  = 0
+let id = 0
 
 module.exports = {
 
-    read: (req, res) => {
+    read: (req, res) =>{
         res.status(200).send(messages)
     },
-    create: (req, res) => {
-        
+    create: (req, res) =>{
         messages.push({
             id: id,
-            text : req.body.text,
+            text: req.body.text,
             time: req.body.time
         })
         id++
-
         res.status(200).send(messages)
     },
-    update: (req, res) => {
+        update: (req, res) => {
         const {id} = req.params
-        let messageIndex = null
-        messages.forEach((element, i) => {
+        let messageIndex = 0
+        messages.map((element, i) => {
             if(element.id === +id){
                 messageIndex = i
             }
         })
         updateMessage = {
-            id: id,
+            id: +id,
             text: req.body.text,
             time: req.body.time
         }
         messages.splice(messageIndex, 1, updateMessage)
         res.status(200).send(messages)
-
-    },
+         },
+    
     delete: (req, res) => {
         const {id} = req.params
-        let messageIndex2 = null
-        messages.forEach((element, i) => {
+        let index2 = 0
+
+        messages.map((element, i) => {
             if(element.id === +id){
-                messageIndex2 = i
+                index2 = i
             }
         })
-        messages.splice(messageIndex2, 1)
+
+        messages.splice(index2, 1)
         res.status(200).send(messages)
     }
+
 }
+
+// // update: (req, res) => {
+//     //     const {id} = req.params
+//     //     let index = null
+        
+//     //     messages.map((element, i) => {
+//     //         if(element.id == +id){
+//     //             index = i
+//     //         }
+//     //     })
+//     //     let newMessage =  {
+//     //         id : +id,
+//     //         text: req.body.text,
+//     //         time: req.body.time
+//     //     }
+
+//     //     messages.splice(index, 1, newMessage)
+//     //     res.status(200).send(messages)
+
+//     // },
+
+
+// let messages = []
+// let id  = 0
+
+// module.exports = {
+
+//     read: (req, res) => {
+//         res.status(200).send(messages)
+//     },
+//     create: (req, res) => {
+        
+//         messages.push({
+//             id: id,
+//             text : req.body.text,
+//             time: req.body.time
+//         })
+//         id++
+
+//         res.status(200).send(messages)
+//     },
+//     update: (req, res) => {
+//         const {id} = req.params
+//         let messageIndex = null
+//         messages.forEach((element, i) => {
+//             if(element.id == id){
+//                 messageIndex = i
+//             }
+//         })
+//         updateMessage = {
+//             id: +id,
+//             text: req.body.text,
+//             time: req.body.time
+//         }
+//         messages.splice(messageIndex, 1, updateMessage)
+//         res.status(200).send(messages)
+
+//     },
+//     delete: (req, res) => {
+//         const {id} = req.params
+//         let messageIndex2 = null
+//         messages.forEach((element, i) => {
+//             if(element.id === +id){
+//                 messageIndex2 = i
+//             }
+//         })
+//         messages.splice(messageIndex2, 1)
+//         res.status(200).send(messages)
+//     }
+// }
+// }
+
 // let messages = [];
 // let id = 0;
 
